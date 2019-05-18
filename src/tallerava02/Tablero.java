@@ -7,6 +7,8 @@ package tallerava02;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.Random;
 import javax.swing.JPanel;
@@ -15,14 +17,14 @@ import javax.swing.JPanel;
  *
  * @author mauri
  */
-public final class Tablero extends JPanel {
+public final class Tablero extends JPanel implements KeyListener {
     
     private static final int DIMENSION = 20;
     private static final int MAXIMO = 800;
     public static final int LADO = MAXIMO / DIMENSION;
     public static Casilla t[][];
-    public static int hx;
-    public static int hy;
+    private static int hx, hy, uptablero, downtablero, rightablero, leftablero;
+    
 
     public Tablero() throws IOException  {
         Imagen img = new Imagen();
@@ -32,6 +34,8 @@ public final class Tablero extends JPanel {
         
         t = new Casilla[DIMENSION][DIMENSION];
         int y = 0;
+        
+        //generar tablero
         for (int i = 0; i < DIMENSION; i++) {
             int x = 0;
             for (int j = 0; j < DIMENSION; j++) {
@@ -40,8 +44,7 @@ public final class Tablero extends JPanel {
                     
                }else {
                     t[i][j]= new Casilla(x,y,img.getImage(Imagen.HDERE));
-                    hx = j;
-                    hy = i;
+                    getAntLocation(i,j);
                }
                 x += LADO;
             }
@@ -49,13 +52,26 @@ public final class Tablero extends JPanel {
         } 
     }
     
-
+    
+    public void getAntLocation(int x, int y) {
+        hx = x;
+        hy = y;
+        
+        downtablero = 20 - hy;
+        uptablero = 20 - downtablero;
+        rightablero = 20 - hx;
+        leftablero = 20 - rightablero;
+        
+    }
+    
+    
     @Override
     public void paintComponent(Graphics g) {
+        t[hy][hx].paintComponent(g); 
         for (int i = 0; i < DIMENSION; i++) {
             for (int j = 0; j < DIMENSION; j++) {                
                 t[i][j].paintComponent(g);
-                t[hy][hx].paintComponent(g);
+                
             }
         }
     }
@@ -65,6 +81,56 @@ public final class Tablero extends JPanel {
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(MAXIMO, MAXIMO);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        Imagen img = new Imagen();
+        
+        
+        if(e.getKeyCode() == KeyEvent.VK_UP) { //hormiga ARRIBA
+            
+            t[hy][hx] = new Casilla(LADO,LADO, img.getImage(Imagen.HARRIBA));
+                
+            if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+                
+                repaint();
+            }
+            repaint();
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_DOWN) { //hormiga ABAJO
+            
+            if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+           
+            }
+        }
+       
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT) { //hormiga DERECHA
+            
+            if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+           
+            }
+        }
+       
+        if(e.getKeyCode() == KeyEvent.VK_LEFT) { //hormiga IZQUIERDA
+            
+            if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+           
+            }
+        }   
+       
+    }
+    
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
