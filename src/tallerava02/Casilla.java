@@ -7,11 +7,11 @@ import java.awt.Image;
 
 /**
  *
- * @author mauri
+ * @author maurici ruiz plaza
  */
 public class Casilla {
     
-    
+    //ATRIBUTOS CASILLA
     private Image image;
     private int x;
     private int y;
@@ -27,6 +27,10 @@ public class Casilla {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(image, x, y, Tablero.LADO, Tablero.LADO, null);
         
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
     
     

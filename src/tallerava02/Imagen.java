@@ -13,10 +13,10 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author mauri
+ * @author maurici ruiz plaza
  */
 public class Imagen {
-    
+    //IMAGENES TABLERO
     public static final String HARRIBA = "harriba.png";
     public static final String HIZQ = "hizquierda.png";
     public static final String HDERE = "hderecha.png";
@@ -30,6 +30,7 @@ public class Imagen {
     public Imagen() {   
     }
     
+    //METODO A TRAVES DE STRING OBTENER IMAGEN
     public Image getImage(String s){
          try {
             image = ImageIO.read(new File(s));
